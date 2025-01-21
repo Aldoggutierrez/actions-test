@@ -7,14 +7,11 @@ jobs:
     steps:
       - name: Create SSH key
         run: |
-            mkdir -p ~/.ssh/
-            echo "$SSH_PRIVATE_KEY" > ../private.key
-            sudo chmod 600 ../private.key
-            echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            ssh-keyscan -H host.example.com > ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
         shell: bash
       - name: test ssh connection
         run: ssh docker-deploy@enlacebooking.travel "printenv"
