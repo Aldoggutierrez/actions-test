@@ -10,9 +10,9 @@ jobs:
             install -m 600 -D /dev/null ~/.ssh/id_rsa
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H enlacebooking.travel > ~/.ssh/known_hosts
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         shell: bash
+      - name: test files on current directory
+        run: ls -al 
       - name: test ssh connection
         run: docker ps
         shell: bash
