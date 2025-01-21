@@ -11,6 +11,8 @@ jobs:
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H enlacebooking.travel > ~/.ssh/known_hosts
         shell: bash
+      - name: checkout repository
+        uses: actions/checkout@v4
       - name: test files on current directory
         run: ls -al 
       - name: test ssh connection
