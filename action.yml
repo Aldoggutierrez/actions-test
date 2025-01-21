@@ -1,0 +1,29 @@
+name: 'Deploy a docker compose file remotely'
+description: 'Action to deploy conainers inside a docker compose files via ssh docker host'
+inputs:
+  ssh-private-key:
+    description: 'ssh private key to use'
+    required: true
+  ssh-host:
+    description: 'ssh host to connect'
+    required: true
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - name: Create SSH key
+        run: |
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
+            ssh-keyscan -H ${{ inputs.ssh-host }} > ~/.ssh/known_hosts
+        shell: bash
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: deploy docker compose file
+        run: docker compose up -d
+        shell: bash
+        env:
+          DOCKER_HOST: ${{secrets.DOCKER_HOST}}
