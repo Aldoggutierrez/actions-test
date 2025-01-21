@@ -13,10 +13,8 @@ jobs:
         shell: bash
       - name: checkout repository
         uses: actions/checkout@v4
-      - name: test files on current directory
-        run: ls -al 
-      - name: test ssh connection
-        run: docker ps
+      - name: deploy docker compose file
+        run: docker compose up -d
         shell: bash
         env:
           DOCKER_HOST: ${{secrets.DOCKER_HOST}}
