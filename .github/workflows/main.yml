@@ -5,12 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v4
-      - id: foo
-        uses: Aldoggutierrez/hello-world-composite-action@e0abf29d839325b656e76b21d9584f5a16fd13a7
-        with:
-          who-to-greet: 'Mona the Octocat'
-      - run: echo random-number "$RANDOM_NUMBER"
+      - run: docker pull php:8.3
         shell: bash
-        env:
-          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
