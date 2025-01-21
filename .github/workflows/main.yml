@@ -6,7 +6,7 @@ jobs:
     name: A job to say hello
     steps:
       - name: docker compose deploy
-        uses: Aldoggutierrez/hello-world-composite-action@94cd0fb2b60fe5341af0c5dcca05c2a7864e4223
+        uses: Aldoggutierrez/hello-world-composite-action@29f51f4f2d7f7d8a8ce4689f89e0a673ce1094a4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: 'enlacebooking.travel'
@@ -14,3 +14,5 @@ jobs:
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           docker-host: ${{ secrets.DOCKER_HOST }}
           pull-images: "true"
+          docker-registry: "harbor.enlacebooking.travel"
+          compose-project-name: "action"
