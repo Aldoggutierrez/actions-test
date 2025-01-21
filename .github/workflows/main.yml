@@ -6,7 +6,7 @@ jobs:
     name: A job to say hello
     steps:
       - name: docker compose deploy
-        uses: Aldoggutierrez/hello-world-composite-action@29f51f4f2d7f7d8a8ce4689f89e0a673ce1094a4
+        uses: Aldoggutierrez/docker-compose-deploy-action@v1.1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: 'enlacebooking.travel'
