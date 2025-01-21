@@ -1,8 +1,3 @@
 services:
   web:
-    image: nginx
-    volumes:
-    - ./templates:/etc/nginx/templates
-    environment:
-    - NGINX_HOST=foobar.com
-    - NGINX_PORT=80
+    image: harbor.enlacebooking.travel/enlacebooking/front@sha256:8b72d2d41959a276945ef25b4ab6f43a8f64f46fd17928fe15c9b88ccb19553e
